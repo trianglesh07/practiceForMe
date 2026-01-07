@@ -2,6 +2,7 @@
 
 #함수 호출
 import tkinter
+import tkinter.ttk
 
 tk = tkinter
 
@@ -18,18 +19,40 @@ logo.place(relx=0.5, rely=0, anchor='n')
 
 #달력 호출 버튼
 #달력 만들기
-cal = tk.Frame(win, width=560, height=500, bg="#D3D3D3")
-for a in range(7):
-    for b in range(5):
-        date=(a+7*b+1)
-        if date <= 31:
-            cell = tk.Label(cal, text=str(date), borderwidth=1)
-            cell.place(relx=0.14*a, rely=0.2*b, anchor="nw", relwidth=(1/6), relheight=0.2)
-        else:
-            cell = tk.Label(cal, text="Elden Ring\nis badass", borderwidth=1)
-            cell.place(relx=0.14 * a, rely=0.2 * b, anchor="nw", relwidth=(1 / 6), relheight=0.2)
+cal = tkinter.ttk.Notebook(win, width=560, height=500)
+
+cal1 = None
+cal2 = None
+cal1 = None
+cal2 = None
+cal3 = None
+cal4 = None
+cal5 = None
+cal6 = None
+cal7 = None
+cal8 = None
+cal9 = None
+cal10 = None
+cal11 = None
+cal12 = None
+
+monthList = {1: cal1, 2: cal2, 3: cal3, 4: cal4, 5: cal5, 6: cal6, 7: cal7, 8: cal8, 9: cal9, 10: cal10, 11: cal11, 12: cal12}
+
+for i in range(1,13):
+    monthList[i] = tk.Frame(cal, bg="#D3D3D3")
+    for a in range(7):
+        for b in range(5):
+            date=(a+7*b+1)
+            if date <= 31:
+                cell = tk.Label(monthList[i], text=str(date), borderwidth=1)
+                cell.place(relx=0.14*a, rely=0.2*b, anchor="nw", relwidth=(1/6), relheight=0.2)
+            else:
+                cell = tk.Label(monthList[i], text="Elden Ring\nis badass", borderwidth=1)
+                cell.place(relx=0.14 * a, rely=0.2 * b, anchor="nw", relwidth=(1 / 6), relheight=0.2)
+    cal.add(monthList[i], text="%d월"%i)
+
 def CalBtn():
-    cal.place(relx=0.5, rely=0.9, anchor="s", relwidth=0.9, relheight=0.65)
+    cal.place(relx=0.5, rely=0.95, anchor="s", relwidth=0.9, relheight=0.65)
 
 calBtn = tk.Button(win, text='달력', command=CalBtn, font=('SimSun-ExtB',15,"bold"), relief="groove")
 calBtn.place(relx=0.05, rely=0.2, anchor='w', relwidth=0.2, relheight=0.1)
