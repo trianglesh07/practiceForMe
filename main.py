@@ -3,6 +3,7 @@
 #함수 호출
 import tkinter
 import tkinter.ttk
+from tkinter import simpledialog
 
 tk = tkinter
 
@@ -18,6 +19,16 @@ logo.place(relx=0.5, rely=0, anchor='n')
 
 
 #달력 호출 버튼
+
+#할일 작성 창 띄우기
+dateSche = None
+
+def whatYouWillDo():
+    global sche
+    scheDo = tk.simpledialog.askstring("할 일", "어떤 계획이 있으신가요?")
+    sche = str(date) + scheDo #클릭된 버튼 위의 날짜가 반영되도록 수정하기
+    print(sche) #할일 목록으로 이동시켜야 함
+
 #달력 만들기
 cal = tkinter.ttk.Notebook(win, width=560, height=500)
 
@@ -45,7 +56,9 @@ for i in range(1,13):
             date=(a+7*b+1)
             if date <= 31:
                 cell = tk.Label(monthList[i], text=str(date), borderwidth=1)
-                cell.place(relx=0.14*a, rely=0.2*b, anchor="nw", relwidth=(1/6), relheight=0.2)
+                cell.place(relx=0.14*a, rely=0.2*b, anchor="nw", relwidth=(1/6), relheight=0.1)
+                writeBtn = tk.Button(monthList[1], command=whatYouWillDo, borderwidth=1)
+                writeBtn.place(relx=0.14*a, rely=0.2*b+0.1, anchor="nw", relwidth=(1/6), relheight=0.1)
             else:
                 cell = tk.Label(monthList[i], text="Elden Ring\nis badass", borderwidth=1)
                 cell.place(relx=0.14 * a, rely=0.2 * b, anchor="nw", relwidth=(1 / 6), relheight=0.2)
