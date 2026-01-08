@@ -23,11 +23,11 @@ logo.place(relx=0.5, rely=0, anchor='n')
 #할일 작성 창 띄우기
 dateSche = None
 
-def whatYouWillDo():
-    global sche
+def whatYouWillDo(n1, n2):
+    global doList
     scheDo = tk.simpledialog.askstring("할 일", "어떤 계획이 있으신가요?")
-    sche = str(date) + scheDo #클릭된 버튼 위의 날짜가 반영되도록 수정하기
-    print(sche) #할일 목록으로 이동시켜야 함
+    sche = (f"{n1} {n2} scheDo")
+    doList.append(sche) #할일 목록으로 이동시켜야 함
 
 #달력 만들기
 cal = tkinter.ttk.Notebook(win, width=560, height=500)
@@ -51,17 +51,18 @@ monthList = {1: cal1, 2: cal2, 3: cal3, 4: cal4, 5: cal5, 6: cal6, 7: cal7, 8: c
 
 for i in range(1,13):
     monthList[i] = tk.Frame(cal, bg="#D3D3D3")
-    for a in range(7):
-        for b in range(5):
-            date=(a+7*b+1)
+    date = 0
+    for a in range(5):
+        for b in range(7):
+            date += 1
             if date <= 31:
                 cell = tk.Label(monthList[i], text=str(date), borderwidth=1)
-                cell.place(relx=0.14*a, rely=0.2*b, anchor="nw", relwidth=(1/6), relheight=0.1)
-                writeBtn = tk.Button(monthList[1], command=whatYouWillDo, borderwidth=1)
-                writeBtn.place(relx=0.14*a, rely=0.2*b+0.1, anchor="nw", relwidth=(1/6), relheight=0.1)
+                cell.place(rely=0.2*a, relx=0.14*b, anchor="nw", relwidth=(1/6), relheight=0.1)
+                writeBtn = tk.Button(monthList[i], borderwidth=1, command=lambda n1=i, n2=date: whatYouWillDo(n1, n2))
+                writeBtn.place(rely=0.2*a+0.1, relx=0.14*b, anchor="nw", relwidth=(1/6), relheight=0.1)
             else:
                 cell = tk.Label(monthList[i], text="Elden Ring\nis badass", borderwidth=1)
-                cell.place(relx=0.14 * a, rely=0.2 * b, anchor="nw", relwidth=(1 / 6), relheight=0.2)
+                cell.place(rely=0.2 * a, relx=0.14 * b, anchor="nw", relwidth=(1 / 6), relheight=0.2)
     cal.add(monthList[i], text="%d월"%i)
 
 def CalBtn():
@@ -71,6 +72,8 @@ calBtn = tk.Button(win, text='달력', command=CalBtn, font=('SimSun-ExtB',15,"b
 calBtn.place(relx=0.05, rely=0.2, anchor='w', relwidth=0.2, relheight=0.1)
 
 #할일 목록 호출 버튼
+doList=[]
+
 def DoList():
     pass
 
