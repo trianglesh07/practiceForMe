@@ -26,7 +26,7 @@ dateSche = None
 def whatYouWillDo(n1, n2):
     global doList
     scheDo = tk.simpledialog.askstring("할 일", "어떤 계획이 있으신가요?")
-    sche = (f"{n1} {n2} scheDo")
+    sche = (f"{n1} {n2} {scheDo}")
     doList.append(sche) #할일 목록으로 이동시켜야 함
 
 #달력 만들기
@@ -73,9 +73,38 @@ calBtn.place(relx=0.05, rely=0.2, anchor='w', relwidth=0.2, relheight=0.1)
 
 #할일 목록 호출 버튼
 doList=[]
+dLtext = "해야 할 일들"
+
+def DolistRe():
+    global dLtext
+    for i in doList:
+        dLtext += (f"\n{i}")
 
 def DoList():
-    pass
+    global dL
+    global dLtext
+    global dLWhat
+    DolistRe()
+    dL = tk.Toplevel()
+    dL.title("할 일 목록")
+    dL.geometry("300x500+0+0")
+    doListAppear = tk.Label(dL, text=dLtext)
+    doListAppear.pack()
+
+    #목록에 추가하기
+    dLWhat = tk.Entry(dL, relief="solid")
+    dLWhat.place(relx=0.5, rely=0.7, relwidth=0.6, anchor="center")     #라디오버튼으로 날짜 입력 추가해야 함
+    dLplus = tk.Button(dL, text="추가", command=(DoListWhat, DolistRe))
+    dLplus.place(relx=0.75, rely=0.9, anchor="center")
+
+    #창 닫기
+    dLclose = tk.Button(dL, text="닫기", command=dL.destroy)
+    dLclose.place(relx=0.9, rely=0.9, anchor="center")
+
+def DoListWhat():
+    global dLWhat
+    dLQuestion = dLWhat.get()   #날짜 입력 추가 필요
+
 
 dlBtn = tk.Button(win, text='해야 할 일', command=DoList, font=('SimSun-ExtB',15,"bold"), relief="groove")
 dlBtn.place(relx=0.3, rely=0.2, anchor='w', relwidth=0.2, relheight=0.1)
