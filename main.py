@@ -81,6 +81,7 @@ def DolistRe():
         dLtext += (f"\n{i}")
 
 def DoList():
+    global doList
     global dL
     global dLtext
     global dLWhat
@@ -93,7 +94,7 @@ def DoList():
 
     #목록에 추가하기
     dLWhat = tk.Entry(dL, relief="solid")
-    dLWhat.place(relx=0.5, rely=0.85, relwidth=0.6, anchor="center")
+    dLWhat.place(relx=0.65, rely=0.9, relwidth=0.6, anchor="center")
 
     def mon_rad():
         global dlMonth
@@ -168,17 +169,44 @@ def DoList():
     dLDateBtn18.place(relx=0.85, rely=0.75, anchor="center")
     dLDateBtn19 = tk.Radiobutton(dL, text="19일", variable=nal, value=19, command=nal_rad)
     dLDateBtn19.place(relx=0.1, rely=0.8, anchor="center")
+    dLDateBtn20 = tk.Radiobutton(dL, text="20일", variable=nal, value=20, command=nal_rad)
+    dLDateBtn20.place(relx=0.25, rely=0.8, anchor="center")
+    dLDateBtn21 = tk.Radiobutton(dL, text="21일", variable=nal, value=21, command=nal_rad)
+    dLDateBtn21.place(relx=0.4, rely=0.8, anchor="center")
+    dLDateBtn22 = tk.Radiobutton(dL, text="22일", variable=nal, value=22, command=nal_rad)
+    dLDateBtn22.place(relx=0.55, rely=0.8, anchor="center")
+    dLDateBtn23 = tk.Radiobutton(dL, text="23일", variable=nal, value=23, command=nal_rad)
+    dLDateBtn23.place(relx=0.7, rely=0.8, anchor="center")
+    dLDateBtn24 = tk.Radiobutton(dL, text="24일", variable=nal, value=24, command=nal_rad)
+    dLDateBtn24.place(relx=0.85, rely=0.8, anchor="center")
+    dLDateBtn25 = tk.Radiobutton(dL, text="25일", variable=nal, value=25, command=nal_rad)
+    dLDateBtn25.place(relx=0.1, rely=0.85, anchor="center")
+    dLDateBtn26 = tk.Radiobutton(dL, text="26일", variable=nal, value=26, command=nal_rad)
+    dLDateBtn26.place(relx=0.25, rely=0.85, anchor="center")
+    dLDateBtn27 = tk.Radiobutton(dL, text="27일", variable=nal, value=27, command=nal_rad)
+    dLDateBtn27.place(relx=0.4, rely=0.85, anchor="center")
+    dLDateBtn28 = tk.Radiobutton(dL, text="28일", variable=nal, value=28, command=nal_rad)
+    dLDateBtn28.place(relx=0.55, rely=0.85, anchor="center")
+    dLDateBtn29 = tk.Radiobutton(dL, text="29일", variable=nal, value=29, command=nal_rad)
+    dLDateBtn29.place(relx=0.7, rely=0.85, anchor="center")
+    dLDateBtn30 = tk.Radiobutton(dL, text="30일", variable=nal, value=28, command=nal_rad)
+    dLDateBtn30.place(relx=0.85, rely=0.85, anchor="center")
+    dLDateBtn31 = tk.Radiobutton(dL, text="31일", variable=nal, value=29, command=nal_rad)
+    dLDateBtn31.place(relx=0.1, rely=0.9, anchor="center")
 
-    dLplus = tk.Button(dL, text="추가", command=(DoListWhat, DolistRe))
-    dLplus.place(relx=0.75, rely=0.9, anchor="center")
+    dLplus = tk.Button(dL, text="추가", command=DoListWhat)
+    dLplus.place(relx=0.75, rely=0.95, anchor="center")
 
     #창 닫기
     dLclose = tk.Button(dL, text="닫기", command=dL.destroy)
-    dLclose.place(relx=0.9, rely=0.9, anchor="center")
+    dLclose.place(relx=0.9, rely=0.95, anchor="center")
 
 def DoListWhat():
     global dLWhat
-    dLQuestion = dLWhat.get()   #날짜 입력 추가 필요
+    global dlMonth, dlNal
+    global doList
+    dLQuestion = dLWhat.get()
+    doList.append(f"{dlMonth} {dlNal} {dLQuestion}")    #할 일 라벨 초기화 필요
 
 
 dlBtn = tk.Button(win, text='해야 할 일', command=DoList, font=('SimSun-ExtB',15,"bold"), relief="groove")
